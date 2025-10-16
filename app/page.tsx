@@ -5,7 +5,7 @@ import type React from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Upload, Sparkles, Music, Loader2, ExternalLink } from "lucide-react"
-import { useState } from "react"
+import { useState, useRef } from "react"
 import Link from "next/link"
 
 type MoodAnalysis = {
@@ -31,37 +31,7 @@ export default function Home() {
   const [detectedMoods, setDetectedMoods] = useState<MoodAnalysis[]>([])
   const [playlist, setPlaylist] = useState<Track[]>([])
   const [uploadedImage, setUploadedImage] = useState<string | null>(null)
-
-  const suggestedMoods = [
-    {
-      id: 1,
-      title: "Happy & Energetic",
-      description: "Upbeat tracks to boost your mood",
-      gradient: "from-yellow-400 to-orange-500",
-      mood: "happy energetic upbeat",
-    },
-    {
-      id: 2,
-      title: "Calm & Relaxed",
-      description: "Peaceful music for relaxation",
-      gradient: "from-blue-400 to-cyan-500",
-      mood: "calm relaxed peaceful",
-    },
-    {
-      id: 3,
-      title: "Focused & Productive",
-      description: "Concentration-enhancing beats",
-      gradient: "from-purple-400 to-pink-500",
-      mood: "focused productive concentration",
-    },
-    {
-      id: 4,
-      title: "Melancholic & Reflective",
-      description: "Emotional and introspective songs",
-      gradient: "from-indigo-400 to-purple-600",
-      mood: "sad melancholic reflective",
-    },
-  ]
+  const resultsRef = useRef<HTMLDivElement>(null)
 
   const handleMoodSubmit = async (moodText?: string) => {
     const queryMood = moodText || mood
@@ -87,6 +57,14 @@ export default function Home() {
 
       setDetectedMoods(data.moods || [])
       setPlaylist(data.tracks || [])
+
+      // Scroll to results after a brief delay to ensure content is rendered
+      setTimeout(() => {
+        resultsRef.current?.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'start' 
+        })
+      }, 100)
     } catch (error) {
       console.error("[v0] Error:", error)
       alert("Failed to analyze mood. Please try again.")
@@ -126,50 +104,19 @@ export default function Home() {
 
       setDetectedMoods(data.moods || [])
       setPlaylist(data.tracks || [])
+
+      // Scroll to results after a brief delay to ensure content is rendered
+      setTimeout(() => {
+        resultsRef.current?.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'start' 
+        })
+      }, 100)
     } catch (error) {
       console.error("[v0] Error:", error)
       alert("Failed to analyze image. Please try again.")
     } finally {
       setIsLoading(false)
-    }
-  }
-
-  const handleSuggestedMoodClick = (suggestedMood: string) => {
-    setMood(suggestedMood)
-    handleMoodSubmit(suggestedMood)
-  }
-
-  const handleShare = async () => {
-    const shareUrl = "https://makeamoodwave.com"
-    const shareText = "Check out VibePulse - Turn your mood into music with AI!"
-
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: "VibePulse",
-          text: shareText,
-          url: shareUrl,
-        })
-      } catch (error) {
-        // User cancelled or share failed
-        if (error instanceof Error && error.name !== "AbortError") {
-          // Fallback to clipboard if share fails (not just cancelled)
-          try {
-            await navigator.clipboard.writeText(shareUrl)
-            alert("Link copied to clipboard!")
-          } catch {
-            alert("Failed to share. Please copy manually: " + shareUrl)
-          }
-        }
-      }
-    } else {
-      // Fallback: copy to clipboard
-      try {
-        await navigator.clipboard.writeText(shareUrl)
-        alert("Link copied to clipboard!")
-      } catch (error) {
-        alert("Failed to copy link. Please copy manually: " + shareUrl)
-      }
     }
   }
 
@@ -195,16 +142,13 @@ export default function Home() {
             Process
           </Link>
           <a
-            href="https://github.com"
+            href="https://github.com/christinaluna/vibepulse"
             target="_blank"
             rel="noopener noreferrer"
             className="hidden text-sm text-white/80 transition-colors hover:text-white md:block"
           >
             GitHub
           </a>
-          <Button size="sm" onClick={handleShare} className="bg-indigo-600 text-white hover:bg-indigo-700">
-            Share
-          </Button>
         </div>
       </nav>
 
@@ -285,31 +229,8 @@ export default function Home() {
           </div>
         </div>
 
-        {!hasQueried && (
-          <div className="mx-auto mt-24 max-w-6xl">
-            <h2 className="mb-8 text-center text-2xl font-semibold text-white">Suggested Moods</h2>
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-              {suggestedMoods.map((suggested) => (
-                <button
-                  key={suggested.id}
-                  onClick={() => handleSuggestedMoodClick(suggested.mood)}
-                  className="group relative overflow-hidden rounded-xl border border-white/10 bg-white/5 p-6 text-left backdrop-blur-xl transition-all hover:scale-105 hover:border-white/20 hover:bg-white/10"
-                >
-                  <div
-                    className={`absolute inset-0 bg-gradient-to-br ${suggested.gradient} opacity-20 transition-opacity group-hover:opacity-30`}
-                  />
-                  <div className="relative">
-                    <h3 className="mb-2 text-lg font-semibold text-white">{suggested.title}</h3>
-                    <p className="text-sm text-white/60">{suggested.description}</p>
-                  </div>
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
-
         {hasQueried && detectedMoods.length > 0 && (
-          <div className="mx-auto mt-24 max-w-6xl">
+          <div ref={resultsRef} className="mx-auto mt-24 max-w-6xl">
             <h2 className="mb-8 text-center text-2xl font-semibold text-white">Detected Moods</h2>
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {detectedMoods.map((moodData, index) => (

@@ -21,11 +21,11 @@ export default function ProcessPage() {
           <Link href="/about" className="hidden text-sm text-white/80 transition-colors hover:text-white md:block">
             About
           </Link>
-          <Link href="/process" className="hidden text-sm text-white md:block">
+          <Link href="/process" className="hidden text-sm text-white/80 transition-colors hover:text-white md:block">
             Process
           </Link>
           <a
-            href="https://github.com"
+            href="https://github.com/christinaluna/vibepulse"
             target="_blank"
             rel="noopener noreferrer"
             className="hidden text-sm text-white/80 transition-colors hover:text-white md:block"
@@ -62,9 +62,9 @@ export default function ProcessPage() {
                 traditional coding workflows?
               </p>
               <p className="text-white/70 leading-relaxed">
-                I used V0, Vercel's AI assistant, to handle the heavy lifting. Instead of writing every line of code
+                I used Figma Make, V0, Vercel's AI assistant, to handle the heavy lifting. Instead of writing every line of code
                 myself, I focused on architecture decisions, feature requirements, and iterative refinement. The result?
-                A fully functional app built in a fraction of the time it would normally take.
+                A fully functional app built in a fraction of the time it would normally take (It took me an hour to put this together).
               </p>
             </div>
 
@@ -93,7 +93,7 @@ export default function ProcessPage() {
                   <div>
                     <h3 className="mb-2 font-semibold text-white">Step 2: Design Implementation</h3>
                     <p className="text-sm text-white/70 leading-relaxed">
-                      I found a reference design with the futuristic aesthetic I wanted—purple gradients, glassmorphism,
+                      I created a quick UI using Figma Make with the futuristic aesthetic I wanted, purple gradients (what says AI more than purple gradients), glassmorphism,
                       subtle animations. Shared it with V0 and it translated the visual language into production-ready
                       code using modern CSS techniques and Tailwind.
                     </p>
@@ -197,14 +197,14 @@ export default function ProcessPage() {
             <div className="rounded-xl border border-white/10 bg-gradient-to-br from-purple-500/20 to-pink-500/20 p-8 backdrop-blur-xl">
               <h2 className="mb-4 text-2xl font-semibold text-white">What I Learned</h2>
               <p className="mb-4 text-white/70 leading-relaxed">
-                Building VibePulse showed me that AI-assisted development isn't about replacing developers—it's about
+                Building VibePulse showed me that AI-assisted development isn't about replacing developers, it's about
                 amplifying what we can do. I spent less time on boilerplate and more time on product decisions, feature
                 design, and user experience.
               </p>
               <p className="text-white/70 leading-relaxed">
                 The workflow shift is significant: instead of writing every function and component from scratch, I
                 focused on architecture, requirements, and iteration. V0 handled implementation details while I guided
-                the product vision. This is what modern development looks like—and it's pretty damn efficient.
+                the product vision. This is what modern development looks like and it's pretty damn efficient.
               </p>
             </div>
 

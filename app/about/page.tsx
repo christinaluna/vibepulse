@@ -25,7 +25,7 @@ export default function AboutPage() {
             Process
           </Link>
           <a
-            href="https://github.com"
+            href="https://github.com/christinaluna/vibepulse"
             target="_blank"
             rel="noopener noreferrer"
             className="hidden text-sm text-white/80 transition-colors hover:text-white md:block"
@@ -48,7 +48,7 @@ export default function AboutPage() {
               About VibePulse
             </h1>
             <p className="text-pretty text-lg text-white/70">
-              Your AI music buddy that actually gets how you're feeling
+              Your AI music buddy that actually gets how you're feeling (sort of)
             </p>
           </div>
 
@@ -57,8 +57,8 @@ export default function AboutPage() {
             <div className="rounded-xl border border-white/10 bg-white/5 p-8 backdrop-blur-xl">
               <h2 className="mb-4 text-2xl font-semibold text-white">What is VibePulse?</h2>
               <p className="mb-4 text-white/70 leading-relaxed">
-                VibePulse is basically your personal DJ that actually understands you. You know that feeling when you're
-                in a specific mood but can't find the right music? Yeah, I built this to fix that.
+                VibePulse is basically your personal DJ. You know that feeling when you're
+                in a specific mood but can't find the right music? Yeah, I built this to fix that. It may not be perfect, after all, this is AI but it was fun nonetheless.
               </p>
               <p className="text-white/70 leading-relaxed">
                 Just tell it how you're feeling or share a photo that captures your vibe, and the AI does its
