@@ -134,18 +134,18 @@ export default function Home() {
             <span className="text-xl font-semibold">VibePulse</span>
           </div>
         </Link>
-        <div className="flex items-center gap-6">
-          <Link href="/about" className="hidden text-sm text-white/80 transition-colors hover:text-white md:block">
+        <div className="flex items-center gap-3 md:gap-6">
+          <Link href="/about" className="text-xs md:text-sm text-white/80 transition-colors hover:text-white">
             About
           </Link>
-          <Link href="/process" className="hidden text-sm text-white/80 transition-colors hover:text-white md:block">
+          <Link href="/process" className="text-xs md:text-sm text-white/80 transition-colors hover:text-white">
             Process
           </Link>
           <a
             href="https://github.com/christinaluna/vibepulse"
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden text-sm text-white/80 transition-colors hover:text-white md:block"
+            className="text-xs md:text-sm text-white/80 transition-colors hover:text-white"
           >
             GitHub
           </a>
