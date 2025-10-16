@@ -296,6 +296,22 @@ export default function Home() {
           </div>
         )}
       </main>
+
+      {/* Footer */}
+      <footer className="border-t border-white/10 bg-black/20 px-4 py-8 backdrop-blur-xl">
+        <div className="mx-auto max-w-6xl text-center">
+          <p className="text-sm text-white/60">
+            Built using{" "}
+            <span className="text-white/80 font-medium">Next.js</span>,{" "}
+            <span className="text-white/80 font-medium">TypeScript</span>,{" "}
+            <span className="text-white/80 font-medium">Tailwind CSS</span>,{" "}
+            <span className="text-white/80 font-medium">Spotify API</span>,{" "}
+            <span className="text-white/80 font-medium">Radix UI</span>,{" "}
+            <span className="text-white/80 font-medium">Figma Make</span>, and{" "}
+            <span className="text-white/80 font-medium">V0</span> ❤️
+          </p>
+        </div>
+      </footer>
     </div>
   )
 }
