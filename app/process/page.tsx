@@ -1,43 +1,129 @@
+"use client"
+
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Sparkles, MessageSquare, Code, Palette, Zap, Music } from "lucide-react"
+import { Sparkles, MessageSquare, Code, Palette, Zap, Music, Menu, X, ExternalLink } from "lucide-react"
+import { useState } from "react"
 
 export default function ProcessPage() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-indigo-800">
       {/* Navigation */}
-      <nav className="flex items-center justify-between px-6 py-4 lg:px-12">
-        <Link href="/" className="flex items-center gap-2 text-white">
-          <div className="flex items-center gap-2">
-            <svg className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M9 18V5l12-2v13" />
-              <circle cx="6" cy="18" r="3" />
-              <circle cx="18" cy="16" r="3" />
-            </svg>
-            <span className="text-xl font-semibold">VibePulse</span>
+      <nav className="relative px-6 py-4 lg:px-12">
+        <div className="flex items-center justify-between">
+          <Link href="/" className="flex items-center gap-2 text-white z-50 relative">
+            <div className="flex items-center gap-2">
+              <svg className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M9 18V5l12-2v13" />
+                <circle cx="6" cy="18" r="3" />
+                <circle cx="18" cy="16" r="3" />
+              </svg>
+              <span className="text-xl font-semibold">VibePulse</span>
+            </div>
+          </Link>
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center gap-6">
+            <Link href="/about" className="text-sm text-white/80 transition-colors hover:text-white">
+              About
+            </Link>
+            <Link href="/process" className="text-sm text-white">
+              Process
+            </Link>
+            <a
+              href="https://github.com/christinaluna/vibepulse"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm text-white/80 transition-colors hover:text-white"
+            >
+              GitHub
+            </a>
+            <Link href="/">
+              <Button size="sm" className="bg-indigo-600 text-white hover:bg-indigo-700">
+                Try It
+              </Button>
+            </Link>
           </div>
-        </Link>
-        <div className="flex items-center gap-3 md:gap-6">
-          <Link href="/about" className="text-xs md:text-sm text-white/80 transition-colors hover:text-white">
-            About
-          </Link>
-          <Link href="/process" className="text-xs md:text-sm text-white">
-            Process
-          </Link>
-          <a
-            href="https://github.com/christinaluna/vibepulse"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-xs md:text-sm text-white/80 transition-colors hover:text-white"
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="md:hidden relative z-50 rounded-lg border border-white/20 bg-white/10 p-2 backdrop-blur-xl transition-all hover:bg-white/20"
+            aria-label="Toggle mobile menu"
           >
-            GitHub
-          </a>
-          <Link href="/">
-            <Button size="sm" className="bg-indigo-600 text-white hover:bg-indigo-700">
-              Try It
-            </Button>
-          </Link>
+            {mobileMenuOpen ? (
+              <X className="h-5 w-5 text-white" />
+            ) : (
+              <Menu className="h-5 w-5 text-white" />
+            )}
+          </button>
         </div>
+
+        {/* Mobile Dropdown Menu */}
+        {mobileMenuOpen && (
+          <>
+            {/* Backdrop */}
+            <div 
+              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 md:hidden"
+              onClick={() => setMobileMenuOpen(false)}
+            />
+            
+            {/* Dropdown */}
+            <div className="absolute top-full right-6 mt-2 w-48 rounded-xl border border-white/20 bg-black/40 backdrop-blur-xl z-50 md:hidden shadow-2xl shadow-purple-500/20">
+              <div className="p-4 space-y-3">
+                <Link 
+                  href="/about" 
+                  className="block text-sm text-white/80 transition-all hover:text-white hover:translate-x-1 hover:pl-2"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <span className="flex items-center gap-3">
+                    <div className="w-1 h-1 rounded-full bg-purple-400"></div>
+                    About
+                  </span>
+                </Link>
+                <Link 
+                  href="/process" 
+                  className="block text-sm text-white transition-all hover:translate-x-1 hover:pl-2"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <span className="flex items-center gap-3">
+                    <div className="w-1 h-1 rounded-full bg-blue-400"></div>
+                    Process
+                  </span>
+                </Link>
+                <a
+                  href="https://github.com/christinaluna/vibepulse"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block text-sm text-white/80 transition-all hover:text-white hover:translate-x-1 hover:pl-2"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <span className="flex items-center gap-3">
+                    <div className="w-1 h-1 rounded-full bg-pink-400"></div>
+                    GitHub
+                    <ExternalLink className="h-3 w-3 ml-auto" />
+                  </span>
+                </a>
+                <div className="pt-2 border-t border-white/10">
+                  <Link 
+                    href="/"
+                    className="block"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <Button size="sm" className="w-full bg-indigo-600 text-white hover:bg-indigo-700">
+                      Try It
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+              
+              {/* Subtle glow effect */}
+              <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-purple-500/10 via-blue-500/10 to-pink-500/10 pointer-events-none"></div>
+            </div>
+          </>
+        )}
       </nav>
 
       {/* Content */}
